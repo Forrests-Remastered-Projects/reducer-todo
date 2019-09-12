@@ -1,12 +1,36 @@
-import React, { useState } from "react";
-import Form from "./form";
+import React, { useReducer } from "react";
+import ReactDOM from "react-dom";
 
-const App = props => {
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+
+import { initialState, todoReducer } from "./reducers";
+
+import "./styles.css";
+
+function App() {
+  const [state, dispatch] = useReducer(todoReducer, initialState);
+
+  const addTodo = item => dispatch({ type: "ADD_TODO", payload: item });
+
+  const toggleCompleted = id => dispatch({ type: "TOGGLE_COMPLETED", id: id });
+
+  const clearCompleted = () => dispatch({ type: "CLEAR_COMPLETED" });
+
+  const updateTodo = (task, id) =>
+    dispatch({ type: "UPDATE_TODO", payload: { task, id } });
+
   return (
-    <div>
-      <h2>Forrest's Todo List</h2>
-      <Form />
+    <div className="App">
+      <TodoForm addTodo={addTodo} clearCompleted={clearCompleted} />
+      <TodoList
+        todos={state.todos}
+        toggleCompleted={toggleCompleted}
+        updateTodo={updateTodo}
+      />
     </div>
   );
-};
-export default App;
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);

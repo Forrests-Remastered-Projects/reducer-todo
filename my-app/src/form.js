@@ -1,37 +1,39 @@
-import React, { useState, useReducer } from 'react';
-import { initialState, titleReducer } from './reducers/reducer'
+import React, { useState, useReducer } from "react";
+import { initialState, titleReducer } from "./reducers/reducer";
+import styled from "styled-components";
 
-const Form = (props) => {
-    const handleChanges = e => {
-        setTodo({[e.target.name]: e.target.value})
-    };
-    
-    const [Todo, setTodo] = useState({
-        item: '',
-        completed: false,
-        id: 112334
-    });
-        
-    const handleSubmit = e => {
-        e.preventDefault()
-        
-            props.addTodo(Todo) 
-    
+const StyledForm = styled.form`
+  background: linear-gradient(#9ee383, #e95f5f);
+  width: 60%;
+  margin: 0 auto;
+`;
 
-    return(
-        <input 
-  type="text"
-  name="Todo"
-  placeholder="task"
-  value={Todo}
-  onChange={handleChanges}
-  
-/>
+const Form = props => {
+  const [todo, setTodo] = useState({
+    item: "",
+    completed: false,
+    id: 112334
+  });
+  const handleChanges = e => {
+    setTodo({ [e.target.name]: e.target.value });
+  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.addTodo(todo);
+  };
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="todo"
+        placeholder="task"
+        value={todo}
+        onChange={handleChanges}
+      />
 
-<button>add</button>
-    
+      <button>add</button>
+    </StyledForm>
+  );
 };
-
-}
 
 export default Form;

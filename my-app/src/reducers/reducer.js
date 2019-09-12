@@ -1,19 +1,58 @@
 export const initialState = {
-  tasks: [],
-  fetchingTask: false,
-  addingTask: false,
-  error: null
+  todos: [
+    {
+      task: "Learn reducers!",
+      completed: false,
+      id: 1
+    },
+    {
+      task: "Learn Context API!",
+      completed: false,
+      id: 2
+    },
+    {
+      task: "Learn redux!",
+      completed: false,
+      id: 3
+    }
+  ]
 };
-export const titleReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "GET_TODO":
-      return { ...state, task: action.payload };
-    case "ADD_TODO":
-      console.log(state);
-      return { ...state, task: action.payload, addingTask: true };
-    case "ADD_ERROR":
-      return { ...state, error: action.payload };
 
+export const todoReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            task: action.payload,
+            id: Date.now(),
+            completed: false
+          }
+        ]
+      };
+    case "TOGGLE_COMPLETED":
+      return {
+        ...state,
+        todos: state.todos.map(todo =>
+          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+        )
+      };
+    case "CLEAR_COMPLETED":
+      return {
+        ...state,
+        todos: state.todos.filter(todo => !todo.completed)
+      };
+    case "UPDATE_TODO":
+      return {
+        ...state,
+        todos: state.todos.map(todo =>
+          todo.id === action.payload.id
+            ? { ...todo, task: action.payload.task }
+            : todo
+        )
+      };
     default:
       return state;
   }
