@@ -1,12 +1,10 @@
 import React, { useReducer } from "react";
 import ReactDOM from "react-dom";
 
-import TodoForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
+import TodoForm from "./form";
+import TodoList from "./Todolist";
 
-import { initialState, todoReducer } from "./reducers";
-
-import "./styles.css";
+import { initialState, todoReducer } from "./reducers/reducer";
 
 function App() {
   const [state, dispatch] = useReducer(todoReducer, initialState);
@@ -32,5 +30,4 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+export default App;

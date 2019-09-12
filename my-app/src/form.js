@@ -1,39 +1,28 @@
-import React, { useState, useReducer } from "react";
-import { initialState, titleReducer } from "./reducers/reducer";
-import styled from "styled-components";
+import React, { useState } from "react";
 
-const StyledForm = styled.form`
-  background: linear-gradient(#9ee383, #e95f5f);
-  width: 60%;
-  margin: 0 auto;
-`;
+export default function TodoForm(props) {
+  const [input, setInput] = useState("");
 
-const Form = props => {
-  const [todo, setTodo] = useState({
-    item: "",
-    completed: false,
-    id: 112334
-  });
-  const handleChanges = e => {
-    setTodo({ [e.target.name]: e.target.value });
+  const handleChanges = event => {
+    setInput(event.target.value);
   };
-  const handleSubmit = e => {
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    props.addTodo(input);
+    setInput("");
+  };
+
+  const clearCompleted = e => {
     e.preventDefault();
-    props.addTodo(todo);
+    props.clearCompleted();
   };
+
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="todo"
-        placeholder="task"
-        value={todo}
-        onChange={handleChanges}
-      />
-
-      <button>add</button>
-    </StyledForm>
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="todo" value={input} onChange={handleChanges} />
+      <button type="submit">Add Todo!</button>
+      <button onClick={clearCompleted}>Clear Completed!</button>
+    </form>
   );
-};
-
-export default Form;
+}
