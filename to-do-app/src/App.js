@@ -20,13 +20,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>To-Do List App</h1>
+      <h1>90's To-Do List App</h1>
       <TodoForm addTodo={addTodo} clearCompleted={clearCompleted} />
+
       <TodoList
         todos={state.todos}
         toggleCompleted={toggleCompleted}
         updateTodo={updateTodo}
       />
+      <img id="one" src="../photo-1554448326-fa887763def2.jpg"></img>
+      <img id="two" src="../photo-1527333118761-68a5b86be367.jpg"></img>
+      <img id="three" src="../photo-1528669631894-8dbd0935e091.jpg"></img>
+      <img id="four" src="../photo-1531525645387-7f14be1bdbbd.jpg"></img>
+
+      <p>© 2019 FORREST DARABIAN - ALL RIGHTS RESERVED</p>
     </div>
   );
 }
