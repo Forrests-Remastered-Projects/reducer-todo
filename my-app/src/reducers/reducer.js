@@ -1,17 +1,17 @@
 export const initialState = {
   todos: [
     {
-      task: "Learn reducers!",
+      task: "Buy a car",
       completed: false,
       id: 1
     },
     {
-      task: "Learn Context API!",
+      task: "Learn to code",
       completed: false,
       id: 2
     },
     {
-      task: "Learn redux!",
+      task: "Do the Dishes",
       completed: false,
       id: 3
     }
