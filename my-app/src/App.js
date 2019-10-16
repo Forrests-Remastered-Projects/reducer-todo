@@ -20,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>To-Do List App</h1>
       <TodoForm addTodo={addTodo} clearCompleted={clearCompleted} />
       <TodoList
         todos={state.todos}
